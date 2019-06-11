@@ -51,23 +51,23 @@ app = Flask(__name__)
 def index():
     dt = datetime.datetime.now(dateutil.tz.tzlocal())
 
+    chicago = dt.astimezone(dateutil.tz.gettz("America/Chicago"))
     utc = dt.astimezone(dateutil.tz.tzutc())
-    loc = dt.astimezone(dateutil.tz.tzlocal())
-    india = dt.astimezone(dateutil.tz.gettz('Asia/Kolkata'))
-    tokyo = dt.astimezone(dateutil.tz.gettz('Asia/Tokyo'))
     london = dt.astimezone(dateutil.tz.gettz('Europe/London'))
-    doha = dt.astimezone(dateutil.tz.gettz('GMT+3'))
-    times = [["server local", printdt(loc)],
+    india = dt.astimezone(dateutil.tz.gettz('Asia/Kolkata'))
+    manila = dt.astimezone(dateutil.tz.gettz("Asia/Manila"))
+    tokyo = dt.astimezone(dateutil.tz.gettz('Asia/Tokyo'))
+    times = [
+             ["Chicago", printdt(chicago)],
              ["UTC", printdt(utc)],
-             ["India", printdt(india)],
-             ["Tokyo", printdt(tokyo)],
              ["London", printdt(london)],
-             ["Doha", printdt(doha)],
+             ["India", printdt(india)],
+             ["Manila", printdt(manila)],
+             ["Tokyo", printdt(tokyo)],
             ]
     ctx = {"times": times}
     return render_template('worldtime.html', **ctx)
 
 if __name__ == "__main__":
     conf = load_yaml("~/worldtime.yaml")
-    print("%s\n" % conf)
     app.run(host=conf["host"], port=conf["port"])
