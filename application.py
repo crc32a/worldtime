@@ -3,7 +3,9 @@ from flask import Flask, render_template
 import datetime
 import dateutil.tz
 import dateutil
+import yaml
 import sys
+import os
 import re
 
 time_re = re.compile("([0-9]+)-([0-9]+)-([0-9]+)\s+([0-9]+):([0-9]+):([0-9]+)")
@@ -35,6 +37,13 @@ def printdt(dt):
     out += lpad(dt.second)
     return out
 
+def load_yaml(file_path):
+    full_path = os.path.abspath(os.path.expanduser(file_path))
+    fp = open(full_path,"r")
+    obj = yaml.safe_load(fp)
+    fp.close()
+    return obj
+
 app = Flask(__name__)
 
 
@@ -58,6 +67,7 @@ def index():
     ctx = {"times": times}
     return render_template('worldtime.html', **ctx)
 
-if __name__ == "__main__":    
-    app.run()
-
+if __name__ == "__main__":
+    conf = load_yaml("~/worldtime.yaml")
+    print("%s\n" % conf)
+    app.run(host=conf["host"], port=conf["port"])
