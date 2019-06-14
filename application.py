@@ -50,7 +50,7 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     dt = datetime.datetime.now(dateutil.tz.tzlocal())
-
+    los_angeles = dt.astimezone(dateutil.tz.gettz("America/Los_Angeles"))
     chicago = dt.astimezone(dateutil.tz.gettz("America/Chicago"))
     utc = dt.astimezone(dateutil.tz.tzutc())
     london = dt.astimezone(dateutil.tz.gettz('Europe/London'))
@@ -58,6 +58,7 @@ def index():
     manila = dt.astimezone(dateutil.tz.gettz("Asia/Manila"))
     tokyo = dt.astimezone(dateutil.tz.gettz('Asia/Tokyo'))
     times = [
+             ["Los Angeles", printdt(los_angeles)],
              ["Chicago", printdt(chicago)],
              ["UTC", printdt(utc)],
              ["London", printdt(london)],
