@@ -54,6 +54,7 @@ def index():
     chicago = dt.astimezone(dateutil.tz.gettz("America/Chicago"))
     utc = dt.astimezone(dateutil.tz.tzutc())
     london = dt.astimezone(dateutil.tz.gettz('Europe/London'))
+    israel = dt.astimezone(dateutil.tz.gettz('Asia/Tel_Aviv'))
     india = dt.astimezone(dateutil.tz.gettz('Asia/Kolkata'))
     manila = dt.astimezone(dateutil.tz.gettz("Asia/Manila"))
     tokyo = dt.astimezone(dateutil.tz.gettz('Asia/Tokyo'))
@@ -62,6 +63,7 @@ def index():
              ["Chicago", printdt(chicago)],
              ["UTC", printdt(utc)],
              ["London", printdt(london)],
+             ["Tel Aviv", printdt(israel)],
              ["India", printdt(india)],
              ["Manila", printdt(manila)],
              ["Tokyo", printdt(tokyo)],
